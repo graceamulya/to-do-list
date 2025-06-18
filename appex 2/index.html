@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Form</title>
+  <style>
+    body {
+  font-family: poppins, sans-serif;
+  background-color: #f2b0e5;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+    .container {
+      background: white;
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #e4117b;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #0d47a1;
+      color: rgb(36, 23, 23);
+      border: none;
+      cursor: pointer;
+    }
+
+    #error-msg {
+      color: red;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Contact Form</h2>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Submit</button>
+      <div id="error-msg"></div>
+    </form>
+  </div>
+
+ <script>
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const errorMsg = document.getElementById('error-msg');
+
+    if (!name || !email || !message) {
+      errorMsg.style.color = "red";
+      errorMsg.textContent = "All fields are required!";
+      return;
+    }
+
+    const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!emailRegex.test(email)) {
+      errorMsg.style.color = "red";
+      errorMsg.textContent = "Invalid email format!";
+      return;
+    }
+
+    // Show verified message
+    errorMsg.style.color = "green";
+    errorMsg.textContent = "Email is verified! Redirecting...";
+
+    // Redirect after 2 seconds
+    setTimeout(() => {
+      window.location.href = "schedule.html";
+    }, 2000);
+  });
+</script>
+</body>
+</html>
